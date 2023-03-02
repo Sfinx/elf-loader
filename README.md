@@ -19,6 +19,12 @@ Build for i386:
 $ make ARCH=i386
 ```
 
+Build for aarch64 ($CC must be set to aarch64-linux-gnu-gcc if crosscompiling) :
+
+```
+$ make ARCH=aarch64
+```
+
 Small build (exclude all messages and printf):
 
 ```
@@ -36,4 +42,3 @@ Load galculator:
 ```
 $ ./loader /usr/bin/galculator
 ```
-

@@ -36,7 +36,7 @@ ret z_##name(t1 a1, t2 a2, t3 a3) \
 	return (ret)SYSCALL(name, a1, a2, a3); \
 }
 
-DEF_SYSCALL2(int, open, const char *, filename, int, flags)
+DEF_SYSCALL3(int, openat, int, dirfd, const char *, filename, int, flags)
 DEF_SYSCALL3(ssize_t, read, int, fd, void *, buf, size_t, count)
 DEF_SYSCALL3(ssize_t, write, int, fd, const void *, buf, size_t, count)
 DEF_SYSCALL1(int, close, int, fd)
@@ -58,3 +58,6 @@ z_mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 #endif
 }
 
+int z_open(const char *pathname, int flags) {
+  return SYSCALL(openat, AT_FDCWD, pathname, flags);
+}

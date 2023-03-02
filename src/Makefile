@@ -1,10 +1,11 @@
 # make ARCH=i386 SMALL=1 DEBUG=1
 
 ARCH ?= amd64
+#DEBUG=1
 
 ARCHS32 := i386
 ARCHS64 := amd64
-ARCHS := $(ARCHS32) $(ARCHS64)
+ARCHS := $(ARCHS32) $(ARCHS64) aarch64
 
 CFLAGS += -pipe -Wall -Wextra -fPIC -fno-ident -fno-stack-protector -U _FORTIFY_SOURCE
 LDFLAGS += -nostartfiles -nodefaultlibs -nostdlib 
@@ -49,4 +50,3 @@ loader: $(OBJS)
 
 clean:
 	rm -rf *.o $(TARGET) */*.o
-
