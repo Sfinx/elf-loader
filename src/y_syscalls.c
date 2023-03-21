@@ -1,11 +1,11 @@
 #include <syscall.h>
 
-#include "z_asm.h"
-#include "z_syscalls.h"
+#include "y_asm.h"
+#include "y_syscalls.h"
 
 static int errno;
 
-int *z_perrno(void)
+int *y_perrno(void)
 {
 	return &errno;
 }
@@ -19,19 +19,19 @@ static long check_error(long rc)
 	return rc;
 }
 
-#define SYSCALL(name, ...)  check_error(z_syscall(SYS_##name, __VA_ARGS__))
+#define SYSCALL(name, ...)  check_error(y_syscall(SYS_##name, __VA_ARGS__))
 #define DEF_SYSCALL1(ret, name, t1, a1) \
-ret z_##name(t1 a1) \
+ret y_##name(t1 a1) \
 { \
 	return (ret)SYSCALL(name, a1); \
 }
 #define DEF_SYSCALL2(ret, name, t1, a1, t2, a2) \
-ret z_##name(t1 a1, t2 a2) \
+ret y_##name(t1 a1, t2 a2) \
 { \
 	return (ret)SYSCALL(name, a1, a2); \
 }
 #define DEF_SYSCALL3(ret, name, t1, a1, t2, a2, t3, a3) \
-ret z_##name(t1 a1, t2 a2, t3 a3) \
+ret y_##name(t1 a1, t2 a2, t3 a3) \
 { \
 	return (ret)SYSCALL(name, a1, a2, a3); \
 }
@@ -46,7 +46,7 @@ DEF_SYSCALL2(int, munmap, void *, addr, size_t, length)
 DEF_SYSCALL3(int, mprotect, void *, addr, size_t, length, int, prot)
 
 void *
-z_mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
+y_mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 {
 #if defined(__i386__)
 	/* i386 has old_mmap and mmap2, old_map is a legacy single arg
@@ -58,6 +58,6 @@ z_mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 #endif
 }
 
-int z_open(const char *pathname, int flags) {
+int y_open(const char *pathname, int flags) {
   return SYSCALL(openat, AT_FDCWD, pathname, flags);
 }

@@ -1,9 +1,9 @@
 	.text
 	.align	4
-	.globl	z_start
-	.hidden	z_start
-	.type	z_start,@function
-z_start:
+	.globl	y_start
+	.hidden	y_start
+	.type	y_start,@function
+y_start:
 	// *sp		- argc
 	// *sp + 1	- argv0
 	// *sp + 2	- argv1
@@ -17,4 +17,4 @@ z_start:
 
 	mov	x0, sp
 	ldp     x1, x2, [sp]
-  	bl	z_entry
+  	bl	y_entry

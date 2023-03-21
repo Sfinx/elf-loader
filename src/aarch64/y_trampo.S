@@ -1,8 +1,8 @@
 	.text
 	.align	4
-	.globl	z_trampo
-	.type	z_trampo,@function
-z_trampo:
+	.globl	y_trampo
+	.type	y_trampo,@function
+y_trampo:
 	// x0 - entry point
 	// x1 - stack
 	// x2 - fini

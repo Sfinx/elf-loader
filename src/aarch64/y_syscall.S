@@ -1,7 +1,7 @@
 	.text
-	.globl	z_syscall
-	.type	z_syscall,@function
-z_syscall:
+	.globl	y_syscall
+	.type	y_syscall,@function
+y_syscall:
 	mov w8, w0
     	mov x0, x1
     	mov x1, x2

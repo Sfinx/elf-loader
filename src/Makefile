@@ -9,7 +9,7 @@ ARCHS := $(ARCHS32) $(ARCHS64) aarch64
 
 CFLAGS += -pipe -Wall -Wextra -fPIC -fno-ident -fno-stack-protector -U _FORTIFY_SOURCE
 LDFLAGS += -nostartfiles -nodefaultlibs -nostdlib 
-LDFLAGS += -pie -e z_start -Wl,-Bsymbolic,--no-undefined,--build-id=none -static -Wl,-Ttext-segment=0x8000000
+LDFLAGS += -pie -e y_start -Wl,-Bsymbolic,--no-undefined,--build-id=none -static -Wl,-Ttext-segment=0x8000000
 TARGET := loader
 
 ifeq "$(filter $(ARCH),$(ARCHS))" ""
@@ -37,8 +37,8 @@ OBJS := $(patsubst %.c,%.o, $(wildcard *.c))
 OBJS += $(patsubst %.S,%.o, $(wildcard $(ARCH)/*.S))
 
 ifdef SMALL
-  OBJS := $(filter-out z_printf.%,$(OBJS))
-  OBJS := $(filter-out z_err.%,$(OBJS))
+  OBJS := $(filter-out y_printf.%,$(OBJS))
+  OBJS := $(filter-out y_err.%,$(OBJS))
   CFLAGS += -DZ_SMALL
 endif
 

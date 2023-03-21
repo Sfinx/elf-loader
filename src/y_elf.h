@@ -1,5 +1,5 @@
-#ifndef Z_ELF_H
-#define Z_ELF_H
+#ifndef Y_ELF_H
+#define Y_ELF_H
 
 #include <elf.h>
 
@@ -15,5 +15,5 @@
 #  error "ELFCLASS is not defined"
 #endif
 
-#endif /* Z_ELF_H */
+#endif /* Y_ELF_H */
 

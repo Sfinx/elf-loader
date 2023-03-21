@@ -2,9 +2,9 @@
 # Kernel spaceABI:  rax (nsys), rdi, rsi, rdx, r10, r8, r9 (stack pointer)
 	.text
 	.align	4
-	.globl	z_syscall
-	.type	z_syscall,@function
-z_syscall:
+	.globl	y_syscall
+	.type	y_syscall,@function
+y_syscall:
 	mov	%rdi, 	%rax
 	mov	%rsi, 	%rdi
 	mov	%rdx, 	%rsi

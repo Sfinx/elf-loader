@@ -1,7 +1,7 @@
 #include <sys/types.h>
 #include <stdarg.h>
 
-#include "z_syscalls.h"
+#include "y_syscalls.h"
 
 static int lastfd = -1;
 #define OUTBUFSIZE 128
@@ -10,7 +10,7 @@ static char *outptr;
 
 static void kprintn(int, unsigned long, int);
 static void kdoprnt(int, const char *, va_list);
-static void z_flushbuf(void);
+static void y_flushbuf(void);
 
 static void putcharfd(int, int );
 
@@ -21,29 +21,29 @@ putcharfd(int c, int fd)
 	int len;
 
 	if (fd != lastfd) {
-		z_flushbuf();
+		y_flushbuf();
 		lastfd = fd;
 	}
 	*outptr++ = b;
 	len = outptr - outbuf;
 	if ((len >= OUTBUFSIZE) || (b == '\n') || (b == '\r')) {
-		z_flushbuf();
+		y_flushbuf();
 	}
 }
 
 static void
-z_flushbuf()
+y_flushbuf()
 {
 	int len = outptr - outbuf;
 	if (len != 0) {
 		if (lastfd != -1)
-			z_write(lastfd, outbuf, len);
+			y_write(lastfd, outbuf, len);
 		outptr = outbuf;
 	}
 }
 
 void
-z_printf(const char *fmt, ...)
+y_printf(const char *fmt, ...)
 {
 	va_list ap;
 
@@ -53,13 +53,13 @@ z_printf(const char *fmt, ...)
 }
 
 void
-z_vprintf(const char *fmt, va_list ap)
+y_vprintf(const char *fmt, va_list ap)
 {
 	kdoprnt(2, fmt, ap);
 }
 
 void
-z_fdprintf(int fd, const char *fmt, ...)
+y_fdprintf(int fd, const char *fmt, ...)
 {
 	va_list ap;
 
@@ -69,7 +69,7 @@ z_fdprintf(int fd, const char *fmt, ...)
 }
 
 void
-z_vfdprintf(int fd, const char *fmt, va_list ap)
+y_vfdprintf(int fd, const char *fmt, va_list ap)
 {
 	kdoprnt(fd, fmt, ap);
 }
@@ -155,7 +155,7 @@ reswitch:
 			putcharfd(ch, fd);
 		}
 	}
-	z_flushbuf();
+	y_flushbuf();
 }
 
 static void

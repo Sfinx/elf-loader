@@ -1,7 +1,7 @@
 	.text
-	.globl	z_syscall
-	.type	z_syscall,@function
-z_syscall:
+	.globl	y_syscall
+	.type	y_syscall,@function
+y_syscall:
 	/* Preserve ABI required registers. */
 	push	%ebp
 	push	%edi
