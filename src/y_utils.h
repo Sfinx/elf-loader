@@ -20,7 +20,7 @@ void	y_fdprintf(int fd, const char *fmt, ...)
 void	y_errx(int eval, const char *fmt, ...)
 	__attribute__ ((format (printf, 2, 3)));
 
-#ifdef Z_SMALL
+#ifdef Y_SMALL
 #  define y_errx(eval, fmt, ...) y_exit(eval)
 #  define y_printf(fmt, ...) do {} while(0)
 #  define y_fdprintf(fd, fmt, ...) do {} while(0)

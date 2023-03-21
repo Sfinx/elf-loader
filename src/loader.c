@@ -96,8 +96,8 @@ err:
 	return LOAD_ERR;
 }
 
-#define Z_PROG		0
-#define Z_INTERP	1
+#define Y_PROG		0
+#define Y_INTERP	1
 
 void y_entry(unsigned long *sp, void (*fini)(void))
 {
@@ -168,13 +168,13 @@ void y_entry(unsigned long *sp, void (*fini)(void))
 #define AVSET(t, v, expr) case (t): (v)->a_un.a_val = (expr); break
 	while (av->a_type != AT_NULL) {
 		switch (av->a_type) {
-		AVSET(AT_PHDR, av, base[Z_PROG] + ehdrs[Z_PROG].e_phoff);
-		AVSET(AT_PHNUM, av, ehdrs[Z_PROG].e_phnum);
-		AVSET(AT_PHENT, av, ehdrs[Z_PROG].e_phentsize);
-		AVSET(AT_ENTRY, av, entry[Z_PROG]);
+		AVSET(AT_PHDR, av, base[Y_PROG] + ehdrs[Y_PROG].e_phoff);
+		AVSET(AT_PHNUM, av, ehdrs[Y_PROG].e_phnum);
+		AVSET(AT_PHENT, av, ehdrs[Y_PROG].e_phentsize);
+		AVSET(AT_ENTRY, av, entry[Y_PROG]);
 		AVSET(AT_EXECFN, av, (unsigned long)argv[1]);
 		AVSET(AT_BASE, av, elf_interp ?
-				base[Z_INTERP] : av->a_un.a_val);
+				base[Y_INTERP] : av->a_un.a_val);
 		}
 		++av;
 	}
@@ -188,7 +188,7 @@ void y_entry(unsigned long *sp, void (*fini)(void))
 	(*sp)--;
 
 	y_trampo((void (*)(void))(elf_interp ?
-			entry[Z_INTERP] : entry[Z_PROG]), sp, y_fini);
+			entry[Y_INTERP] : entry[Y_PROG]), sp, y_fini);
 	/* Should not reach. */
 	y_exit(0);
 }

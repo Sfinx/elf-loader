@@ -39,7 +39,7 @@ OBJS += $(patsubst %.S,%.o, $(wildcard $(ARCH)/*.S))
 ifdef SMALL
   OBJS := $(filter-out y_printf.%,$(OBJS))
   OBJS := $(filter-out y_err.%,$(OBJS))
-  CFLAGS += -DZ_SMALL
+  CFLAGS += -DY_SMALL
 endif
 
 .PHONY: clean all
