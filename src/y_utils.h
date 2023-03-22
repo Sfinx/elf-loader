@@ -8,7 +8,7 @@
 
 #define y_alloca	__builtin_alloca
 
-void	*y_memset(void *s, int c, size_t n);
+// void	*y_memset(void *s, int c, size_t n);
 void	*y_memcpy(void *dest, const void *src, size_t n);
 
 void	y_vprintf(const char *fmt, va_list ap);

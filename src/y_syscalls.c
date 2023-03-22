@@ -3,7 +3,7 @@
 #include "y_asm.h"
 #include "y_syscalls.h"
 
-static int errno;
+int errno = 0;
 
 int *y_perrno(void)
 {

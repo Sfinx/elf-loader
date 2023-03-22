@@ -6,15 +6,7 @@
 y_start:
 	// *sp		- argc
 	// *sp + 1	- argv0
-	// *sp + 2	- argv1
-	// 		- 0x0000
-	// *sp + n	- envp
-
-	// x0 - ?
-	// x1 - ?
-	// x2 - ?
-	// x3 - envp
-
+	// *sp + 2	- fini
 	mov	x0, sp
-	ldp     x1, x2, [sp]
+	ldr     x1, [sp, #16]
   	bl	y_entry

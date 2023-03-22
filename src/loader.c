@@ -13,7 +13,7 @@
 #define LOAD_ERR	((unsigned long)-1)
 
 /* External fini function that the caller can provide us. */
-static void (*x_fini)(void);
+void (*x_fini)(void) = 0;
 
 static void y_fini(void)
 {

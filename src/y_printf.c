@@ -6,7 +6,7 @@
 static int lastfd = -1;
 #define OUTBUFSIZE 128
 static char outbuf[OUTBUFSIZE];
-static char *outptr;
+static char *outptr = outbuf;
 
 static void kprintn(int, unsigned long, int);
 static void kdoprnt(int, const char *, va_list);
@@ -80,12 +80,6 @@ kdoprnt(int fd, const char *fmt, va_list ap)
 	unsigned long ul;
 	int lflag, ch;
 	char *p;
-	static int init;
-
-	if (!init) {
-		outptr = outbuf;
-		init = 1;
-	}
 
 	for (;;) {
 		while ((ch = *fmt++) != '%') {
